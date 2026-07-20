@@ -104,4 +104,31 @@
     </div>
 
 </body>
+<script>
+let form = document.querySelector("form");
+
+form.addEventListener("submit", loginFunction);
+
+function loginFunction(event) {
+    event.preventDefault();
+
+    let username = form.elements[0].value;
+    let password = form.elements[1].value;
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    let user = users.find(function(u) {
+        return u.username === username;
+    });
+
+    if (!user) {
+        alert("Username not found!");
+    } else if (user.password !== password) {
+        alert("Wrong Password!");
+    } else {
+        alert("Login Successful!");
+        window.location.href = "registration.html";
+    }
+}
+</script>
 </html>

@@ -98,12 +98,41 @@
         </form>
 
         <p>
-            <a href="login.html">Back to Login</a>
+            <a href="index.html">Back to Login</a>
         </p>
 
     </div>
 
 </body>
+<script>
+    let form = document.querySelector("form");
+    let data = JSON.parse(localStorage.getItem("users")) || [];
+
+    form.addEventListener("submit", formFunction);
+
+    function formFunction(event){
+        event.preventDefault();
+
+        let arr = form.elements;
+
+        let name = arr[0].value;
+        let email = arr[1].value;
+        let username = arr[2].value;
+        let password = arr[3].value;
+
+        let obj = {
+            name: name,
+            email: email,
+            username: username,
+            password: password
+        };
+        data.push(obj);
+        localStorage.setItem("users", JSON.stringify(data));
+        alert("Registration Successful!");
+        form.reset();
+        window.location.href = "index.html";
+    }
+</script>
 </html>
 
 
